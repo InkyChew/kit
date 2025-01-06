@@ -1,0 +1,82 @@
+.card {
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.section-title {
+    font-size: 1.25rem;
+    margin-bottom: 10px;
+    color: #444;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.setting-group {
+    display: flex;
+}
+
+.field {
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.input {
+    width: 50px;
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 5px;
+}
+
+.input:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+.help-text {
+    font-size: 0.875rem;
+    color: #777;
+}
+
+.checkbox {
+    margin-right: 10px;
+}
+
+.form-footer {
+    text-align: center;
+}
+
+.submit-btn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.submit-btn:hover {
+    background-color: #0056b3;
+}
+
+/* Responsive Styles */
+@media (max-width: 600px) {
+    .settings-form {
+        padding: 15px;
+    }
+
+    .input {
+        font-size: 1.1rem;
+    }
+}
