@@ -1,5 +1,5 @@
 export enum Stage {
-    Pomodoro,
-    ShortBreak,
-    LongBreak
+    Pomodoro = 1,
+    ShortBreak = 2,
+    LongBreak = 3
 }

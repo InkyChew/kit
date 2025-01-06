@@ -1,14 +1,16 @@
 <h1 class="page-title">Pomodoro</h1>
 
-<section class="card">
-    <ul>
-        <li>Pomodoro</li>
-        <li>Short Break</li>
-        <li>Long Break</li>
+<section class="timer-section card">
+    <ul class="tabs">
+        <li class="tab"><button [ngClass]="{'active' : stage == 1}" (click)="setStage(1)">Pomodoro</button></li>
+        <li class="tab"><button [ngClass]="{'active' : stage == 2}" (click)="setStage(2)">Short Break</button></li>
+        <li class="tab"><button [ngClass]="{'active' : stage == 3}" (click)="setStage(3)">Long Break</button></li>
     </ul>
     <!-- 仿真番茄鐘 -->
-    <div>{{ now | time }}</div>
+    <div class="timer">{{ now | time }}</div>
+    <div>#{{ times }}</div>
     <button (click)="trigger()">{{ timer && !timer.closed ? 'Stop' : 'Start'}}</button>
+    <button (click)="nextStage()">Next Stage</button>
 </section>
 
 <section>

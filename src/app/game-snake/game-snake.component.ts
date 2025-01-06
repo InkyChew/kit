@@ -61,7 +61,7 @@ export class GameSnakeComponent {
     if(head.x === this.food.x && head.y === this.food.y) {
       this.score++;
       this.gameSpeed--;
-      this.randomFoodPosition();
+      this.food = this.randomFoodPosition();
     }
     else {
       this.snake.pop();
