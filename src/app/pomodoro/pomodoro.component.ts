@@ -31,6 +31,17 @@ export class PomodoroComponent {
     this.setStage();
   }
 
+  timerStyle() {
+    switch (this.stage) {
+      case Stage.Pomodoro:
+        return 'pomodoro';
+      case Stage.ShortBreak:
+        return 'shortBreak';
+      case Stage.LongBreak:
+        return 'longBreak';
+    }
+  }
+
   setStage(stage?: Stage) {
     this.stage = stage ?? this.stage;
 
@@ -57,7 +68,7 @@ export class PomodoroComponent {
       case Stage.Pomodoro:
         this.stage = this.focusTimes % this.interval > 0 ? Stage.ShortBreak : Stage.LongBreak;
         this.focusTimes++;
-        if(this.focusTimes > 2) this.breakTimes++;
+        if (this.focusTimes > 2) this.breakTimes++;
         break;
       case Stage.ShortBreak:
       case Stage.LongBreak:

@@ -2,13 +2,19 @@
     text-align: center;
 }
 
-.card {
-    max-width: 600px;
-    margin: 0 auto;
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+.pomodoro {
+    background-color: #E63946;
+    color: #ffffff;
+}
+
+.shortBreak {
+    background-color: #2A9D8F;
+    color: #ffffff;
+}
+
+.longBreak {
+    background-color: #264653;
+    color: #ffffff;
 }
 
 .tabs {
@@ -22,18 +28,36 @@
     list-style: none;
 }
 
-.tab button {
+button {
+    color: #ffffff;
     font-weight: bold;
     background: transparent;
     padding: 1em 2em;
     border: none;
     outline: none;
     cursor: pointer;
+    border-radius: 8px;
 }
 
-.tab button.active {
-    background: red;
-    color: white;
+.pomodoro button.active {
+    background-color: #ae2a35;
+}
+
+.shortBreak button.active {
+    background-color: #1d6b62;
+}
+
+.longBreak button.active {
+    background-color: #0d191d;
+}
+
+
+.card {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .timer {

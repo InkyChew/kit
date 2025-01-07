@@ -1,17 +1,22 @@
 <h1 class="page-title">Pomodoro</h1>
 
-<section class="timer-section card">
-    <ul class="tabs">
-        <li class="tab"><button [ngClass]="{'active' : stage == 1}" (click)="setStage(1)">Pomodoro</button></li>
-        <li class="tab"><button [ngClass]="{'active' : stage == 2}" (click)="setStage(2)">Short Break</button></li>
-        <li class="tab"><button [ngClass]="{'active' : stage == 3}" (click)="setStage(3)">Long Break</button></li>
-    </ul>
-    <!-- 仿真番茄鐘 -->
-    <div class="timer">{{ now | time }}</div>
-    <div>#{{ times }}</div>
-    <button (click)="trigger()">{{ timer && !timer.closed ? 'Stop' : 'Start'}}</button>
-    <button (click)="nextStage()">Next Stage</button>
-</section>
+<div class="timer-section card" [ngClass]="timerStyle()" >
+    <nav>
+        <ul class="tabs">
+            <li class="tab"><button [class.active]="stage === 1" (click)="setStage(1)">Pomodoro</button></li>
+            <li class="tab"><button [class.active]="stage === 2" (click)="setStage(2)">Short Break</button></li>
+            <li class="tab"><button [class.active]="stage === 3" (click)="setStage(3)">Long Break</button></li>
+        </ul>
+    </nav>
+
+    <article>
+        <!-- 仿真番茄鐘 -->
+        <div class="timer">{{ now | time }}</div>
+        <div>#{{ times }}</div>
+        <button (click)="trigger()">{{ timer && !timer.closed ? 'Stop' : 'Start'}}</button>
+        <button (click)="nextStage()">Next Stage</button>
+    </article>
+</div>
 
 <section>
     <h2 class="section-title">Settings</h2>
