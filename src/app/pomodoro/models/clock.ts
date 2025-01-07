@@ -11,6 +11,7 @@ export interface IClock {
     interval?: number,
     color: string,
     timerSubscription?: Subscription;
+    sound: string
 
     nextStage(component?: PomodoroComponent): Stage;
     start(): void;
@@ -23,6 +24,7 @@ export abstract class Clock implements IClock {
     autoStart: boolean = false;
     color: string = "#E63946";
     timerSubscription?: Subscription;
+    sound: string = "/assets/pomodoro/bell.mp3";
 
     private _minute: number = 25;
     get minute(): number {
