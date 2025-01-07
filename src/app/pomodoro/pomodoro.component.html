@@ -12,10 +12,13 @@
     <article>
         <!-- 仿真番茄鐘 -->
         <div class="timer">{{ clock.milliseconds | time }}</div>
-        <div>#{{ times }}</div>
-        <button (click)="trigger()">{{ timerSubscription && !timerSubscription.closed ? 'Stop' : 'Start'}}</button>
-        @if (timerSubscription && !timerSubscription.closed) {
+        <div>#{{ clock.round }}</div>
+        @if (clock.isStart) {
+        <button (click)="clock.stop()">Stop</button>
         <button (click)="nextStage()">Next Stage</button>
+        }
+        @else {
+        <button (click)="clock.start()">Start</button>
         }
     </article>
 </div>
