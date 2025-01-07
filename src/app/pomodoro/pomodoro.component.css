@@ -1,20 +1,7 @@
 .timer-section {
     text-align: center;
-}
-
-.pomodoro {
-    background-color: #E63946;
     color: #ffffff;
-}
-
-.shortBreak {
-    background-color: #2A9D8F;
-    color: #ffffff;
-}
-
-.longBreak {
-    background-color: #264653;
-    color: #ffffff;
+    background-color: var(--theme);
 }
 
 .tabs {
@@ -25,7 +12,21 @@
 
 .tab {
     list-style: none;
+    font-weight: bold;
 }
+
+a {
+    color: #ffffff;
+    text-decoration: none;
+    padding: 1em 2em;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+a.active {
+    background-color: color-mix(in srgb, var(--theme), black 20%);
+}
+
 
 button {
     color: #ffffff;
@@ -38,28 +39,6 @@ button {
     border-radius: 8px;
 }
 
-a {
-    color: #ffffff;
-    font-weight: bold;
-    text-decoration: none;
-    padding: 1em 2em;
-    cursor: pointer;
-    border-radius: 8px;
-}
-
-.pomodoro a.active {
-    background-color: #ae2a35;
-}
-
-.shortBreak a.active {
-    background-color: #1d6b62;
-}
-
-.longBreak a.active {
-    background-color: #0d191d;
-}
-
-
 .card {
     max-width: 600px;
     margin: 0 auto;
@@ -70,78 +49,4 @@ a {
 
 .timer {
     font-size: 4rem;
-}
-
-.section-title {
-    font-size: 1.25rem;
-    margin-bottom: 10px;
-    color: #444;
-    text-transform: uppercase;
-    font-weight: 600;
-}
-
-.setting-group {
-    display: flex;
-}
-
-.field {
-    font-size: 1rem;
-    color: #555;
-    margin-bottom: 5px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.input {
-    width: 50px;
-    padding: 10px;
-    font-size: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    margin-bottom: 5px;
-}
-
-.input:focus {
-    border-color: #007bff;
-    outline: none;
-}
-
-.help-text {
-    font-size: 0.875rem;
-    color: #777;
-}
-
-.checkbox {
-    margin-right: 10px;
-}
-
-.form-footer {
-    text-align: center;
-}
-
-.submit-btn {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    font-size: 1rem;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-.submit-btn:hover {
-    background-color: #0056b3;
-}
-
-/* Responsive Styles */
-@media (max-width: 600px) {
-    .settings-form {
-        padding: 15px;
-    }
-
-    .input {
-        font-size: 1.1rem;
-    }
 }

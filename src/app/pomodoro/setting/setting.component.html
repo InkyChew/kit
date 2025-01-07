@@ -1,0 +1,40 @@
+<article>
+    <h2 class="section-title">Settings</h2>
+    <form class="settings-form card">
+        <section class="settings-timer">
+            <h3 class="section-title">Timer</h3>
+
+            <label for="minutes" class="field">
+                <p>Minutes</p>
+                <input type="number" id="minutes" name="minutes" min="1" step="1" class="input" placeholder="min"
+                    [(ngModel)]="clock.minute">
+            </label>
+
+            @if (clock.interval) {
+            <label for="interval" class="field">
+                <p>Interval</p>
+                <input type="number" id="interval" name="interval" min="1" step="1" class="input"
+                    [(ngModel)]="clock.interval">
+            </label>
+            }
+
+            <label for="autoStart" class="field">
+                <p>Auto Start</p>
+                <input type="checkbox" id="autoStart" name="autoStart" class="checkbox" [(ngModel)]="clock.autoStart">
+            </label>
+        </section>
+
+        <section>
+            <h3>Sound</h3>
+            alarm sound
+
+        </section>
+
+
+        <section>
+            <h3>Theme</h3>
+            pomodoro
+
+        </section>
+    </form>
+</article>

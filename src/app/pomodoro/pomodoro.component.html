@@ -1,6 +1,6 @@
 <h1 class="page-title">Pomodoro</h1>
 
-<div class="timer-section card" [ngClass]="timerStyle()">
+<div class="timer-section card" [style.--theme]="clock.color">
     <nav>
         <ul class="tabs">
             <li class="tab"><a routerLink="/pomodoro/1" routerLinkActive="active">Pomodoro</a></li>
@@ -11,83 +11,13 @@
 
     <article>
         <!-- 仿真番茄鐘 -->
-        <div class="timer">{{ now | time }}</div>
+        <div class="timer">{{ clock.milliseconds | time }}</div>
         <div>#{{ times }}</div>
-        <button (click)="trigger()">{{ timer && !timer.closed ? 'Stop' : 'Start'}}</button>
-        @if (timer && !timer.closed) {
+        <button (click)="trigger()">{{ timerSubscription && !timerSubscription.closed ? 'Stop' : 'Start'}}</button>
+        @if (timerSubscription && !timerSubscription.closed) {
         <button (click)="nextStage()">Next Stage</button>
         }
     </article>
 </div>
 
-<section>
-    <h2 class="section-title">Settings</h2>
-    <form class="settings-form card">
-        <section class="timer-settings">
-            <h3 class="section-title">Timer</h3>
-
-            <!-- Pomodoro Duration -->
-
-            <label for="pomodoro" class="field">
-                <span>Pomodoro</span>
-                <input type="number" id="pomodoro" name="pomodoro" min="1" step="1" class="input" placeholder="min"
-                    [(ngModel)]="pomodoro">
-            </label>
-
-            <label for="pomodoro" class="field">
-                <span>Short Break</span>
-                <input type="number" id="shortBreak" name="shortBreak" min="1" step="1" class="input" placeholder="min"
-                    [(ngModel)]="shortBreak">
-            </label>
-
-            <label for="pomodoro" class="field">
-                <span>Long Break</span>
-                <input type="number" id="longBreak" name="longBreak" min="1" step="1" class="input" placeholder="min"
-                    [(ngModel)]="longBreak">
-            </label>
-
-            <label for="interval" class="field">
-                <span>Interval</span>
-                <input type="number" id="interval" name="interval" min="1" step="1" class="input"
-                    [(ngModel)]="interval">
-            </label>
-
-
-            <div class="field">
-                <label>Auto Start</label>
-                <div class="setting-group">
-                    <label for="autoPomodoro" class="field">
-                        <span>Pomodoro</span>
-                        <input type="checkbox" id="autoPomodoro" name="autoPomodoro" class="checkbox">
-                    </label>
-
-                    <label for="autoShortBreak" class="field">
-                        <span>Short Break</span>
-                        <input type="checkbox" id="autoShortBreak" name="autoShortBreak" class="checkbox">
-                    </label>
-
-                    <label for="autoLongBreak" class="field">
-                        <span>Long Break</span>
-                        <input type="checkbox" id="autoLongBreak" name="autoLongBreak" class="checkbox">
-                    </label>
-                </div>
-            </div>
-        </section>
-
-
-        <section>
-            <h3>Sound</h3>
-            alarm sound
-
-        </section>
-
-
-        <section>
-            <h3>Theme</h3>
-            pomodoro
-            short break
-            long break
-
-        </section>
-    </form>
-</section>
+<app-setting [clock]="clock"></app-setting>
