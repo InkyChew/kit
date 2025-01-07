@@ -4,7 +4,7 @@
     score: {{ score }}
 </div>
 
-<div class="game-board">
+<table class="game-board">
     @for(col of [].constructor(this.boardSize); let y = $index; track y) {
         <tr>{{y}}
             @for(col of [].constructor(this.boardSize); let x = $index; track x) {
@@ -12,4 +12,4 @@
             }
         </tr>
     }
-</div>
+</table>

@@ -1,7 +1,5 @@
 .game-board {
-    /* display: grid;
-    grid-template-columns: repeat(20, 20px);
-    grid-template-rows: repeat(20, 20px); */
+    border-collapse: collapse;
 }
 
 .game-board td {
