@@ -43,7 +43,11 @@ export class PomodoroComponent {
         break;
     }
 
-    this.clock.timerSubscription?.unsubscribe();
+    if (this.clock.autoStart) {
+      this.clock.start();
+    } else {
+      this.clock.stop();
+    }
   }
 
   nextStage() {
