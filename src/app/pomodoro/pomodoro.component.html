@@ -1,11 +1,11 @@
 <h1 class="page-title">Pomodoro</h1>
 
-<div class="timer-section card" [ngClass]="timerStyle()" >
+<div class="timer-section card" [ngClass]="timerStyle()">
     <nav>
         <ul class="tabs">
-            <li class="tab"><button [class.active]="stage === 1" (click)="setStage(1)">Pomodoro</button></li>
-            <li class="tab"><button [class.active]="stage === 2" (click)="setStage(2)">Short Break</button></li>
-            <li class="tab"><button [class.active]="stage === 3" (click)="setStage(3)">Long Break</button></li>
+            <li class="tab"><a routerLink="/pomodoro/1" routerLinkActive="active">Pomodoro</a></li>
+            <li class="tab"><a routerLink="/pomodoro/2" routerLinkActive="active">Short Break</a></li>
+            <li class="tab"><a routerLink="/pomodoro/3" routerLinkActive="active">Long Break</a></li>
         </ul>
     </nav>
 
@@ -14,7 +14,9 @@
         <div class="timer">{{ now | time }}</div>
         <div>#{{ times }}</div>
         <button (click)="trigger()">{{ timer && !timer.closed ? 'Stop' : 'Start'}}</button>
+        @if (timer && !timer.closed) {
         <button (click)="nextStage()">Next Stage</button>
+        }
     </article>
 </div>
 

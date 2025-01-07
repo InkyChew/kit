@@ -21,7 +21,6 @@
     display: flex;
     justify-content: center;
     padding: 0;
-    margin: 0;
 }
 
 .tab {
@@ -39,15 +38,24 @@ button {
     border-radius: 8px;
 }
 
-.pomodoro button.active {
+a {
+    color: #ffffff;
+    font-weight: bold;
+    text-decoration: none;
+    padding: 1em 2em;
+    cursor: pointer;
+    border-radius: 8px;
+}
+
+.pomodoro a.active {
     background-color: #ae2a35;
 }
 
-.shortBreak button.active {
+.shortBreak a.active {
     background-color: #1d6b62;
 }
 
-.longBreak button.active {
+.longBreak a.active {
     background-color: #0d191d;
 }
 

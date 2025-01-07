@@ -4,5 +4,6 @@ import { PomodoroComponent } from './pomodoro/pomodoro.component';
 
 export const routes: Routes = [
     {path: 'snake', component: GameSnakeComponent, pathMatch: 'full', title: 'snake'},
-    {path: 'pomodoro', component: PomodoroComponent, pathMatch: 'full', title: 'Pomodoro'}
+    {path: 'pomodoro', redirectTo: 'pomodoro/1'},
+    {path: 'pomodoro/:stage', component: PomodoroComponent, pathMatch: 'full', title: 'Pomodoro'}
 ];
