@@ -1,26 +1,3 @@
 <h1 class="page-title">Pomodoro</h1>
 
-<div class="timer-section card" [style.--theme]="clock.color">
-    <nav>
-        <ul class="tabs">
-            <li class="tab"><a routerLink="/pomodoro/1" routerLinkActive="active">Pomodoro</a></li>
-            <li class="tab"><a routerLink="/pomodoro/2" routerLinkActive="active">Short Break</a></li>
-            <li class="tab"><a routerLink="/pomodoro/3" routerLinkActive="active">Long Break</a></li>
-        </ul>
-    </nav>
-
-    <article>
-        <!-- 仿真番茄鐘 -->
-        <div class="timer">{{ clock.milliseconds | time }}</div>
-        <div>#{{ clock.round }}</div>
-        @if (clock.isStart) {
-        <button (click)="clock.stop()">Stop</button>
-        <button (click)="nextStage()">Next Stage</button>
-        }
-        @else {
-        <button (click)="clock.start()">Start</button>
-        }
-    </article>
-</div>
-
-<app-setting [clock]="clock"></app-setting>
+<router-outlet />

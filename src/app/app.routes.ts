@@ -1,9 +1,18 @@
 import { Routes } from '@angular/router';
 import { GameSnakeComponent } from './game-snake/game-snake.component';
 import { PomodoroComponent } from './pomodoro/pomodoro.component';
+import { ClockComponent } from './pomodoro/clock/clock.component';
+import { SettingComponent } from './pomodoro/setting/setting.component';
 
 export const routes: Routes = [
-    {path: 'snake', component: GameSnakeComponent, pathMatch: 'full', title: 'snake'},
-    {path: 'pomodoro', redirectTo: 'pomodoro/1'},
-    {path: 'pomodoro/:stage', component: PomodoroComponent, pathMatch: 'full', title: 'Pomodoro'}
+    { path: 'snake', component: GameSnakeComponent, pathMatch: 'full', title: 'snake' },
+    {
+        path: 'pomodoro', component: PomodoroComponent, title: 'Pomodoro',
+        children: [
+            { path: '', redirectTo: '1', pathMatch: 'full' },
+            { path: ':stage', component: ClockComponent, pathMatch: 'full' },
+            { path: 'setting', redirectTo: '1', pathMatch: 'full' },
+            { path: 'setting/:stage', component: SettingComponent, pathMatch: 'full' },
+        ]
+    },
 ];
