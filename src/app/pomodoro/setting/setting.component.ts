@@ -1,42 +1,59 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { IClock } from '../models/clock';
+import { Component } from '@angular/core';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { SettingService } from '../services/setting.service';
+import { IClockSetting } from '../models/clock-setting';
 
 @Component({
   selector: 'app-setting',
   standalone: true,
-  imports: [FormsModule],
+  imports: [ReactiveFormsModule],
   templateUrl: './setting.component.html',
   styleUrl: './setting.component.css'
 })
 export class SettingComponent {
-  @Input({ required: true }) clock!: IClock;
-  @Output() onChanged = new EventEmitter<IClock>();
+  setting?: IClockSetting;
   audioPlayer?: HTMLAudioElement;
+  audioFiles = this._service.getAudioFiles();
+  colors = this._service.getColors();
 
-  audioFiles = [
-    { name: 'bell', path: '/assets/pomodoro/bell.mp3' },
-    { name: 'ding', path: '/assets/pomodoro/ding.mp3' },
-    { name: 'bell-ding', path: '/assets/pomodoro/bell-ding.mp3' },
-    { name: 'lofi', path: '/assets/pomodoro/lofi.mp3' },
-    { name: 'guitar', path: '/assets/pomodoro/guitar.mp3' },
-    { name: 'melody', path: '/assets/pomodoro/melody.mp3' },
-  ];
+  settingForm: FormGroup = this._formBuilder.group({
+    minute: [0, [Validators.required, Validators.min(1)]],
+    autoStart: [false],
+    sound: ['', Validators.required],
+    color: ['', Validators.required],
+  })
 
-  colors = [
-    '#E63946',
-    '#2A9D8F',
-    '#264653'
-  ]
+  constructor(private _service: SettingService,
+    private _formBuilder: FormBuilder
+  ) { }
 
   ngOnInit() {
+    this.getClock();
+  }
+
+  getClock() {
+    this._service.getClockSetting(2).subscribe(res => {
+      this.setting = res;
+      if (this.setting.interval) {
+        this.settingForm.addControl('interval',
+          this._formBuilder.control(0, [Validators.required, Validators.min(1)])
+        );
+      }
+      this.settingForm.patchValue(this.setting);
+    });
   }
 
   playAudio() {
-    if (this.audioPlayer)
-      this.audioPlayer.pause();
-    this.audioPlayer = new Audio(this.clock.sound);
+    this.audioPlayer?.pause();
+    this.audioPlayer = new Audio(this.setting!.sound);
     this.audioPlayer.play();
+  }
+
+  save() {
+    if (!this.settingForm.dirty || this.settingForm.invalid) return;
+    this.setting = { ...this.setting, ...this.settingForm.value };
+    this._service.putClockSetting(this.setting!);
+    // console.log(this.clock);
   }
 
   ngOnDestroy() {

@@ -1,29 +1,30 @@
-<article [style.--theme]="clock.color">
+@if (setting) {
+<article [style.--theme]="setting.color">
     <h2 class="section-title">Settings</h2>
-    <form class="settings-form card">
+    <form class="settings-form card" [formGroup]="settingForm" (ngSubmit)="save()">
 
         <label for="minutes" class="field">
             <p>Minutes</p>
-            <input type="number" id="minutes" name="minutes" min="1" step="1" class="input" placeholder="min"
-                [(ngModel)]="clock.minute">
+            <input type="number" id="minute" name="minute" min="1" step="1" class="input" placeholder="min"
+                formControlName="minute">
         </label>
 
-        @if (clock.interval) {
+        @if(settingForm.get('interval')) {
         <label for="interval" class="field">
             <p>Interval</p>
             <input type="number" id="interval" name="interval" min="1" step="1" class="input"
-                [(ngModel)]="clock.interval">
+                formControlName="interval">
         </label>
         }
 
         <label for="autoStart" class="field">
             <p>Auto Start</p>
-            <input type="checkbox" id="autoStart" name="autoStart" class="checkbox" [(ngModel)]="clock.autoStart">
+            <input type="checkbox" id="autoStart" name="autoStart" class="checkbox" formControlName="autoStart">
         </label>
 
         <label for="sound" class="field">
             <p>Sound</p>
-            <select id="sound" name="sound" [(ngModel)]="clock.sound" (change)="playAudio()">
+            <select id="sound" name="sound" formControlName="sound" (change)="playAudio()">
                 @for (audio of audioFiles; track $index) {
                 <option [value]="audio.path">{{ audio.name }}</option>
                 }
@@ -32,11 +33,14 @@
 
         <label for="sound" class="field">
             <p>Theme</p>
-            <select id="color" name="color" [(ngModel)]="clock.color">
+            <select id="color" name="color" formControlName="color">
                 @for (color of colors; track $index) {
                 <option [value]="color">{{ color }}</option>
                 }
             </select>
         </label>
+
+        <button type="submit">save</button>
     </form>
 </article>
+}
