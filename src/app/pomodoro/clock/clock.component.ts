@@ -4,9 +4,7 @@ import { ActivatedRoute, Router, RouterLink, RouterLinkActive } from '@angular/r
 import { Stage } from '../models/stage';
 import { ClockService } from '../services/clock.service';
 import { SettingService } from '../services/setting.service';
-import { IClockSetting } from '../models/clock-setting';
 import { IClockState } from '../models/clock-state';
-import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-clock',
@@ -17,12 +15,7 @@ import { Subscription } from 'rxjs';
 })
 export class ClockComponent {
   clockState?: IClockState;
-  
-  clock?: IClockSetting;
-  milliseconds: number = 0;
   focusTimes: number = this._service.getFocusTimes();
-  isStart: boolean = false;
-  timerSubscription?: Subscription;
 
   constructor(private _route: ActivatedRoute, public router: Router,
     private _service: ClockService,
@@ -37,9 +30,7 @@ export class ClockComponent {
   getClock(stage: Stage) {
     this.clockState?.stop();
     this._settingService.getClockSetting(stage).subscribe(res => {
-      this.clock = res;
-      this.milliseconds = this.clock.minute * 60000;
-      this.clockState = this._service.createClockState(stage, this);
+      this.clockState = this._service.createClockState(stage, this, res);
       this.clockState?.init();
     });
   }

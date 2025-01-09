@@ -1,10 +1,15 @@
-import { timer } from "rxjs";
+import { Subscription, timer } from "rxjs";
 import { Stage } from "./stage";
 import { ClockComponent } from "../clock/clock.component";
+import { IClockSetting } from "./clock-setting";
 
 export interface IClockState {
     component: ClockComponent;
+    clock: IClockSetting;
     round: number;
+    milliseconds: number;
+    isStart: boolean;
+    timerSubscription?: Subscription;
     init(): void;
     nextStage(): void;
     start(): void;
@@ -14,9 +19,16 @@ export interface IClockState {
 export abstract class ClockState implements IClockState {
     abstract round: number;
     component: ClockComponent;
+    clock: IClockSetting;
+    milliseconds: number;
+    isStart: boolean = false;
+    timerSubscription?: Subscription;
 
-    constructor(component: ClockComponent) {
+    constructor(component: ClockComponent,
+        clock: IClockSetting) {
         this.component = component;
+        this.clock = clock;
+        this.milliseconds = clock.minute * 60000;
     }
 
     abstract init(): void;
@@ -24,19 +36,19 @@ export abstract class ClockState implements IClockState {
 
     start() {
         this.stop();
-        this.component.timerSubscription = timer(0, 1000).subscribe(n => {
-            this.component.isStart = true;
-            if (this.component.milliseconds <= 1000) {
+        this.timerSubscription = timer(0, 1000).subscribe(n => {
+            this.isStart = true;
+            if (this.milliseconds <= 1000) {
                 this.stop();
                 this.nextStage();
             }
-            this.component.milliseconds -= 1000;
+            this.milliseconds -= 1000;
         });
     }
 
     stop() {
-        this.component.isStart = false;
-        this.component.timerSubscription?.unsubscribe();
+        this.isStart = false;
+        this.timerSubscription?.unsubscribe();
     }
 }
 
@@ -44,13 +56,13 @@ export class FocusState extends ClockState {
     round: number = this.component.focusTimes;
 
     init() {
-        this.component.focusTimes > 1 && this.component.clock?.autoStart
+        this.component.focusTimes > 1 && this.clock.autoStart
             ? this.start() : this.stop();
     }
 
     nextStage() {
         this.component.updateFocusTimes();
-        const stage = this.component.focusTimes % this.component.clock?.interval! > 0
+        const stage = this.component.focusTimes % this.clock.interval! > 0
             ? Stage.ShortBreak
             : Stage.LongBreak;
         this.component.nextStage(stage);
@@ -61,7 +73,7 @@ export class BreakState extends ClockState {
     round: number = this.component.focusTimes - 1;
 
     init() {
-        this.component.clock?.autoStart ? this.start() : this.stop();
+        this.clock.autoStart ? this.start() : this.stop();
     }
 
     nextStage() {
