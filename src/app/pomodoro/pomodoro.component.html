@@ -6,4 +6,7 @@
         <li class="tab"><a routerLink="" routerLinkActive="active">Intro</a></li>
     </ul>
 </nav>
-<router-outlet />
+
+<div [@pageTransition]="page" [@tabTransition]="tab">
+    <router-outlet />
+</div>
