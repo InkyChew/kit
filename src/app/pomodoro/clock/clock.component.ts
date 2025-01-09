@@ -5,6 +5,7 @@ import { Stage } from '../models/stage';
 import { ClockService } from '../services/clock.service';
 import { SettingService } from '../services/setting.service';
 import { IClockState } from '../models/clock-state';
+import { AudioService } from '../services/audio.service';
 
 @Component({
   selector: 'app-clock',
@@ -19,7 +20,8 @@ export class ClockComponent {
 
   constructor(private _route: ActivatedRoute, public router: Router,
     private _service: ClockService,
-    private _settingService: SettingService
+    private _settingService: SettingService,
+    public audioService: AudioService
   ) {
     this._route.params.subscribe(pms => {
       const stage = +pms['stage'];

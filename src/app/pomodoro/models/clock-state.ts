@@ -36,9 +36,11 @@ export abstract class ClockState implements IClockState {
 
     start(delay: number = 0) {
         this.stop();
+        this.component.audioService.clear();
         this.timerSubscription = timer(delay, 1000).subscribe(n => {
             this.isStart = true;
             if (this.milliseconds <= 1000) {
+                this.component.audioService.play(this.clock.sound);
                 this.stop();
                 this.nextStage();
             }

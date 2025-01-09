@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { SettingService } from '../services/setting.service';
 import { IClockSetting } from '../models/clock-setting';
 import { RouterLink, RouterLinkActive, ActivatedRoute } from '@angular/router';
+import { AudioService } from '../services/audio.service';
 
 @Component({
   selector: 'app-setting',
@@ -25,8 +26,9 @@ export class SettingComponent {
   })
 
   constructor(private _route: ActivatedRoute,
+    private _formBuilder: FormBuilder,
     private _service: SettingService,
-    private _formBuilder: FormBuilder
+    private _audioService: AudioService
   ) {
     this._route.params.subscribe(pms => {
       const stage = +pms['stage'];
@@ -47,9 +49,7 @@ export class SettingComponent {
   }
 
   playAudio() {
-    this.audioPlayer?.pause();
-    this.audioPlayer = new Audio(this.setting!.sound);
-    this.audioPlayer.play();
+    this._audioService.play(this.settingForm.value.sound);
   }
 
   save() {
@@ -60,7 +60,6 @@ export class SettingComponent {
   }
 
   ngOnDestroy() {
-    this.audioPlayer?.pause();
-    this.audioPlayer = undefined;
+    this._audioService.clear();
   }
 }
