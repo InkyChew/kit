@@ -1,7 +1,13 @@
-@if (setting) {
-<article [style.--theme]="setting.color">
-    <h2 class="section-title">Settings</h2>
-    <form class="settings-form card" [formGroup]="settingForm" (ngSubmit)="save()">
+<div class="section card" [style.--theme]="settingForm.value.color">
+    <nav>
+        <ul class="tabs">
+            <li class="tab"><a routerLink="/pomodoro/setting/1" routerLinkActive="active">Pomodoro</a></li>
+            <li class="tab"><a routerLink="/pomodoro/setting/2" routerLinkActive="active">Short Break</a></li>
+            <li class="tab"><a routerLink="/pomodoro/setting/3" routerLinkActive="active">Long Break</a></li>
+        </ul>
+    </nav>
+
+    <form [formGroup]="settingForm" (ngSubmit)="save()">
 
         <label for="minutes" class="field">
             <p>Minutes</p>
@@ -9,7 +15,7 @@
                 formControlName="minute">
         </label>
 
-        @if(settingForm.get('interval')) {
+        @if(settingForm.value.interval) {
         <label for="interval" class="field">
             <p>Interval</p>
             <input type="number" id="interval" name="interval" min="1" step="1" class="input"
@@ -42,5 +48,4 @@
 
         <button type="submit">save</button>
     </form>
-</article>
-}
+</div>

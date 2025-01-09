@@ -26,14 +26,14 @@ export class SettingService {
     const clocks = [, new PomodoroSetting(), new ShortBreakSetting(), new LongBreakSetting()];
     const clock = clocks[id];
     if (clock) {
-      return this._dbService.create(clock);
+      return this._dbService.put(clock);
     } else {
       return throwError(() => 'Invalid clock ID');
     }
   }
 
   putClockSetting(clock: IClockSetting) {
-    return this._dbService.update(clock);
+    return this._dbService.put(clock);
   }
 
   getAudioFiles() {

@@ -1,7 +1,21 @@
-.timer-section {
+.section {
+    --txt-color: #ffffff;
+    --theme-dark-color: color-mix(in srgb, var(--theme), black 20%);
     text-align: center;
-    color: #ffffff;
+    color: var(--txt-color);
     background-color: var(--theme);
+}
+
+.card {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.timer {
+    font-size: 4rem;
 }
 
 .tabs {
@@ -16,7 +30,7 @@
 }
 
 a {
-    color: #ffffff;
+    color: var(--txt-color);
     text-decoration: none;
     padding: 1em 2em;
     border-radius: 8px;
@@ -24,12 +38,11 @@ a {
 }
 
 a.active {
-    background-color: color-mix(in srgb, var(--theme), black 20%);
+    background-color: var(--theme-dark-color);
 }
 
-
 button {
-    color: #ffffff;
+    color: var(--txt-color);
     font-weight: bold;
     background: transparent;
     padding: 1em 2em;
@@ -37,16 +50,4 @@ button {
     outline: none;
     cursor: pointer;
     border-radius: 8px;
-}
-
-.card {
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-}
-
-.timer {
-    font-size: 4rem;
 }

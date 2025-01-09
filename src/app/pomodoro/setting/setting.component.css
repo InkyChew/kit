@@ -1,3 +1,11 @@
+.section {
+    --txt-color: #ffffff;
+    --theme-dark-color: color-mix(in srgb, var(--theme), black 20%);
+    text-align: center;
+    color: var(--txt-color);
+    background-color: var(--theme);
+}
+
 .card {
     max-width: 600px;
     margin: 0 auto;
@@ -6,25 +14,8 @@
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-.timer {
-    font-size: 4rem;
-}
-
-.section-title {
-    font-size: 1.25rem;
-    margin-bottom: 10px;
-    color: #444;
-    text-transform: uppercase;
-    font-weight: 600;
-}
-
-.setting-group {
-    display: flex;
-}
-
 .field {
     font-size: 1rem;
-    color: #555;
     margin-bottom: 5px;
     display: flex;
     align-items: center;
@@ -35,52 +26,53 @@ input,
 select {
     padding: 10px;
     font-size: 1rem;
-    border: 1px solid #ccc;
+    border: 1px solid transparent;
     border-radius: 4px;
     margin-bottom: 5px;
+    color: var(--txt-color);
+    background-color: var(--bg-color);
 }
 
 input:focus,
 select:focus {
-    border-color: var(--theme);
     outline: none;
+    background-color: var(--theme-dark-color);
 }
 
-.help-text {
-    font-size: 0.875rem;
-    color: #777;
+.tabs {
+    display: flex;
+    justify-content: center;
+    padding: 0;
 }
 
-.checkbox {
-    margin-right: 10px;
+.tab {
+    list-style: none;
+    font-weight: bold;
 }
 
-.form-footer {
-    text-align: center;
-}
-
-.submit-btn {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    font-size: 1rem;
-    border-radius: 4px;
+a {
+    color: var(--txt-color);
+    text-decoration: none;
+    padding: 1em 2em;
+    border-radius: 8px;
     cursor: pointer;
-    transition: background-color 0.3s;
 }
 
-.submit-btn:hover {
-    background-color: #0056b3;
+a.active {
+    background-color: var(--theme-dark-color);
 }
 
-/* Responsive Styles */
-@media (max-width: 600px) {
-    .settings-form {
-        padding: 15px;
-    }
+button {
+    font-weight: bold;
+    color: var(--txt-color);
+    background: var(--theme);
+    padding: 1em 2em;
+    border: 1px solid var(--txt-color);
+    outline: none;
+    cursor: pointer;
+    border-radius: 8px;
+}
 
-    .input {
-        font-size: 1.1rem;
-    }
+button:hover {
+    background: var(--theme-dark-color);
 }

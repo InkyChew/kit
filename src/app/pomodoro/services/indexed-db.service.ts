@@ -36,27 +36,6 @@ export class IndexedDbService {
     });
   }
 
-  public create(clock: IClockSetting): Observable<IClockSetting> {
-    return this.openDatabase().pipe(
-      switchMap((db) => {
-        const transaction = db.transaction(this.storeName, 'readwrite');
-        const store = transaction.objectStore(this.storeName);
-        const request = store.add(clock);
-
-        return new Observable<IClockSetting>((observer) => {
-          request.onsuccess = () => {
-            observer.next(clock);
-            observer.complete();
-          };
-
-          request.onerror = (event) => {
-            observer.error((event.target as IDBRequest).error);
-          };
-        });
-      })
-    );
-  }
-
   public read(id: number): Observable<IClockSetting> {
     return this.openDatabase().pipe(
       switchMap((db) => {
@@ -79,16 +58,16 @@ export class IndexedDbService {
   }
 
 
-  public update(clock: IClockSetting): Observable<void> {
+  public put(clock: IClockSetting): Observable<IClockSetting> {
     return this.openDatabase().pipe(
       switchMap((db) => {
         const transaction = db.transaction(this.storeName, 'readwrite');
         const store = transaction.objectStore(this.storeName);
         const request = store.put(clock);
 
-        return new Observable<void>((observer) => {
+        return new Observable<IClockSetting>((observer) => {
           request.onsuccess = () => {
-            observer.next();
+            observer.next(clock);
             observer.complete();
           };
 

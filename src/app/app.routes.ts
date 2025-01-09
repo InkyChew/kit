@@ -11,7 +11,6 @@ export const routes: Routes = [
         children: [
             { path: '', redirectTo: '1', pathMatch: 'full' },
             { path: ':stage', component: ClockComponent, pathMatch: 'full' },
-            { path: 'setting', redirectTo: '1', pathMatch: 'full' },
             { path: 'setting/:stage', component: SettingComponent, pathMatch: 'full' },
         ]
     },
