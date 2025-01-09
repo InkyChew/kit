@@ -22,10 +22,7 @@ export class PomodoroComponent {
       filter(event => event instanceof NavigationEnd)
     ).subscribe(() => {
       this.page = +this._route.firstChild?.snapshot.data['page'];
-    });
-
-    this._route.firstChild?.params.subscribe(pms => {
-      this.tab = +pms['stage'];
+      this.tab = +this._route.firstChild?.snapshot.params['stage'];
     });
   }
 }

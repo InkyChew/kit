@@ -34,9 +34,9 @@ export abstract class ClockState implements IClockState {
     abstract init(): void;
     abstract nextStage(): void;
 
-    start() {
+    start(delay: number = 0) {
         this.stop();
-        this.timerSubscription = timer(0, 1000).subscribe(n => {
+        this.timerSubscription = timer(delay, 1000).subscribe(n => {
             this.isStart = true;
             if (this.milliseconds <= 1000) {
                 this.stop();
@@ -57,7 +57,7 @@ export class FocusState extends ClockState {
 
     init() {
         this.component.focusTimes > 1 && this.clock.autoStart
-            ? this.start() : this.stop();
+            ? this.start(1000) : this.stop();
     }
 
     nextStage() {
@@ -73,7 +73,7 @@ export class BreakState extends ClockState {
     round: number = this.component.focusTimes - 1;
 
     init() {
-        this.clock.autoStart ? this.start() : this.stop();
+        this.clock.autoStart ? this.start(1000) : this.stop();
     }
 
     nextStage() {
