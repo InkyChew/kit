@@ -1,0 +1,8 @@
+.main {
+    background-color: var(--theme);
+    overflow: hidden;
+}
+
+.main-nav {
+    position: fixed;
+}

@@ -1,5 +1,6 @@
 @if (clockState) {
-    <div class="section card" [style.--theme]="clockState.clock.color">
+<div class="section" [style.--theme]="clockState.clock.color">
+    <div class="card">
         <nav>
             <ul class="tabs">
                 <li class="tab"><a routerLink="/pomodoro/1" routerLinkActive="active">Pomodoro</a></li>
@@ -21,4 +22,5 @@
             }
         </article>
     </div>
+</div>
 }

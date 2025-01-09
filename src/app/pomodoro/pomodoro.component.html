@@ -1,12 +1,14 @@
-<h1 class="page-title">Pomodoro</h1>
-<nav>
-    <ul class="tabs">
-        <li class="tab"><a routerLink="/pomodoro" routerLinkActive="active">Pomodoro</a></li>
-        <li class="tab"><a routerLink="/pomodoro/setting/1" routerLinkActive="active">Setting</a></li>
-        <li class="tab"><a routerLink="" routerLinkActive="active">Intro</a></li>
-    </ul>
-</nav>
-
-<div [@pageTransition]="page" [@tabTransition]="tab">
-    <router-outlet />
+<!-- <h1 class="page-title">Pomodoro</h1> -->
+<div class="main" [style.--theme]="color">
+    <nav class="main-nav">
+        <ul class="tabs">
+            <li class="tab"><a [routerLink]="['/pomodoro', tab]" routerLinkActive="active">Pomodoro</a></li>
+            <li class="tab"><a [routerLink]="['/pomodoro/setting', tab]" routerLinkActive="active">Setting</a></li>
+            <li class="tab"><a routerLink="" routerLinkActive="active">Intro</a></li>
+        </ul>
+    </nav>
+    
+    <main [@pageTransition]="page" [@tabTransition]="tab">
+        <router-outlet />
+    </main>
 </div>
