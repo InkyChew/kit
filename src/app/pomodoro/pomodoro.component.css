@@ -1,8 +1,46 @@
 .main {
+    --txt-color: #ffffff;
+    --theme-dark-color: color-mix(in srgb, var(--theme), black 20%);
+    --theme-light-color: color-mix(in srgb, var(--theme), white 20%);
     background-color: var(--theme);
     overflow: hidden;
 }
 
-.main-nav {
+nav {
     position: fixed;
+    right: 0;
+    bottom: 1em;
+    margin: .75em;
+}
+
+.tabs {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.tab a {
+    display: block;
+    padding: .75em;
+    background: var(--theme-dark-color);
+    margin-bottom: .75em;
+    border-radius: 50%;
+}
+
+.tab a.active {
+    background: var(--theme-light-color);
+    border: 1px var(--theme-dark-color);
+}
+
+footer {
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    padding: .5em;
+    text-align: center;
+    color: var(--txt-color);
+}
+
+a {
+    color: var(--txt-color);
 }

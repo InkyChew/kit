@@ -1,0 +1,12 @@
+.section {
+    --txt-color: #ffffff;
+    --theme-dark-color: color-mix(in srgb, var(--theme), black 20%);
+    height: 100vh;
+    text-align: center;
+    color: var(--txt-color);
+    background-color: var(--theme);
+}
+
+h3 {
+    margin-top: 0;
+}
