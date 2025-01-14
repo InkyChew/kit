@@ -1,6 +1,7 @@
 import { PomodoroComponent } from "../pomodoro.component";
 
 export interface IPageState {
+    order: number;
     component: PomodoroComponent;
     init(): void;
     navigateUp(): void;
@@ -10,6 +11,7 @@ export interface IPageState {
 }
 
 export abstract class PageState implements IPageState {
+    abstract order: number;
     abstract path: string;
     component: PomodoroComponent;
 
@@ -33,7 +35,7 @@ export abstract class PageState implements IPageState {
 }
 
 export class ClockPage extends PageState {
-    id: number = 1;
+    order: number = 1;
     path: string = '/pomodoro/clock';
 
     init() {
@@ -50,7 +52,7 @@ export class ClockPage extends PageState {
 }
 
 export class SettingPage extends PageState {
-    id: number = 2;
+    order: number = 2;
     path: string = '/pomodoro/setting';
 
     init() {
@@ -67,7 +69,7 @@ export class SettingPage extends PageState {
 }
 
 export class InfoPage extends PageState {
-    id: number = 3;
+    order: number = 3;
     path: string = '/pomodoro/info';
 
     init() {

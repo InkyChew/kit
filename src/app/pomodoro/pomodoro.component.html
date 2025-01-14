@@ -8,11 +8,13 @@
         </ul>
     </nav>
     
-    <main [@pageTransition]="page" [@tabTransition]="tab">
-        <router-outlet />
-    </main>
+    @if (pageState) {
+        <main [@pageTransition]="pageState.order" [@tabTransition]="tab">
+            <router-outlet />
+        </main>
+    }
 
     <footer>
-        © <a href="">InkyChew</a> 2025
+        © <a href="https://inkychew.github.io/about/" target="_blank">InkyChew</a> 2025
     </footer>
 </div>

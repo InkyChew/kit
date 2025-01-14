@@ -1,5 +1,5 @@
 import { Component, HostListener } from '@angular/core';
-import { ActivatedRoute, NavigationEnd, Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { ActivatedRoute, ActivatedRouteSnapshot, NavigationEnd, Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { pageTransition, tabTransition } from './transitions/route-transition';
 import { filter } from 'rxjs';
 import { SettingService } from './services/setting.service';
@@ -14,7 +14,7 @@ import { ClockPage, InfoPage, IPageState, SettingPage } from './models/page-stat
   animations: [pageTransition, tabTransition]
 })
 export class PomodoroComponent {
-  page: number = 1;
+  snapshot?: ActivatedRouteSnapshot;
   tab: number = 1;
   color: string = "";
   pageState?: IPageState;
@@ -25,15 +25,14 @@ export class PomodoroComponent {
     this._router.events.pipe(
       filter(event => event instanceof NavigationEnd)
     ).subscribe(() => {
-      const snapshot = this._route.firstChild?.snapshot;
-      this.page = +snapshot?.data['page'];
+      this.snapshot = this._route.firstChild?.snapshot;
       this.setPage();
-      this.pageState?.init();
     });
   }
 
   setPage() {
-    switch (this.page) {
+    const page = +this.snapshot?.data['page'];
+    switch (page) {
       case 1:
         this.pageState = new ClockPage(this);
         break;
@@ -44,11 +43,11 @@ export class PomodoroComponent {
         this.pageState = new InfoPage(this);
         break;
     }
+    this.pageState?.init();
   }
 
   setTab() {
-    const snapshot = this._route.firstChild?.snapshot;
-    this.tab = +snapshot?.params['stage'];
+    this.tab = +this.snapshot?.params['stage'];
     this._settingService.getClockSetting(this.tab).subscribe(res => this.color = res.color);
   }
 
@@ -58,7 +57,6 @@ export class PomodoroComponent {
 
   @HostListener('window:keydown', ['$event'])
   handleKeyDown(event: KeyboardEvent) {
-    let i = this.page;
     switch (event.key) {
       case 'ArrowUp':
         this.pageState?.navigateUp();
