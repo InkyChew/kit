@@ -12,31 +12,35 @@ import { interval, Subscription } from 'rxjs';
 export class GameSnakeComponent {
 
   boardSize: number = 20;
-  snake: IPoint[] = [{x: Math.floor(this.boardSize / 2), y: Math.floor(this.boardSize / 2)}];
+  snake: IPoint[] = [{ x: Math.floor(this.boardSize / 2), y: Math.floor(this.boardSize / 2) }];
   direction: Direction = Direction.Right;
   food: IPoint = this.randomFoodPosition();
   score: number = 0;
   gameSpeed: number = 200;
   gameInterval?: Subscription;
-  
-  ngOnInit() {
-    this.startGame();
-  }
-  
-  startGame() {
-    this.boardSize = this.boardSize;
-    this.snake = this.snake;
-    this.direction = this.direction;
+  gameStart: boolean = false;
+
+  ngOnInit() { }
+
+  initGame() {
+    this.boardSize = 20;
+    this.snake = [{ x: Math.floor(this.boardSize / 2), y: Math.floor(this.boardSize / 2) }];
+    this.direction = Direction.Right;
     this.food = this.randomFoodPosition();
-    this.score = this.score;
-    this.gameSpeed = this.gameSpeed;
-    this.gameInterval = interval(this.gameSpeed).subscribe(() => this.updateGame());
+    this.score = 0;
+    this.gameSpeed = 200;
   }
 
-  updateGame() {    
-    let head = {...this.snake[0]};
-      
-    switch(this.direction) {
+  startGame() {
+    this.initGame();
+    this.gameInterval = interval(this.gameSpeed).subscribe(() => this.updateGame());
+    this.gameStart = true;
+  }
+
+  updateGame() {
+    let head = { ...this.snake[0] };
+
+    switch (this.direction) {
       case Direction.Up:
         head.y--;
         break;
@@ -51,14 +55,14 @@ export class GameSnakeComponent {
         break;
     }
 
-    if(this.isCollision(head)) {
+    if (this.isCollision(head)) {
       this.endGame();
       return;
     }
 
     this.snake.unshift(head);
 
-    if(head.x === this.food.x && head.y === this.food.y) {
+    if (head.x === this.food.x && head.y === this.food.y) {
       this.score++;
       this.gameSpeed--;
       this.food = this.randomFoodPosition();
@@ -69,19 +73,19 @@ export class GameSnakeComponent {
   }
 
   isCollision(head: IPoint) {
-    if(head.x < 0 || head.x >= this.boardSize || head.y < 0 || head.y >= this.boardSize) {
+    if (head.x < 0 || head.x >= this.boardSize || head.y < 0 || head.y >= this.boardSize) {
       return true;
     }
-    
-    // for(let part of this.snake) {
-    //   if(this.snake.length > 0 && head.x === part.x || head.y === part.y) {
-    //     return true;
-    //   }
-    // }
+
+    for (let part of this.snake) {
+      if (this.snake.length > 0 && head.x === part.x && head.y === part.y) {
+        return true;
+      }
+    }
 
     return false;
   }
-  
+
   randomFoodPosition(): IPoint {
     let position: IPoint;
     do {
@@ -89,24 +93,25 @@ export class GameSnakeComponent {
         x: Math.floor(Math.random() * this.boardSize),
         y: Math.floor(Math.random() * this.boardSize)
       };
-    } while(this.isSnake(position.x, position.y));
+    } while (this.isSnake(position.x, position.y));
     return position;
   }
 
   endGame() {
     this.gameInterval?.unsubscribe();
+    this.gameStart = false;
   }
 
   isSnake(x: number, y: number) {
     return this.snake.some(part => part.x === x && part.y === y);
   }
-  
+
   isFood(x: number, y: number) {
     return this.food.x === x && this.food.y === y;
   }
 
   @HostListener('window:keydown', ['$event'])
-  handleKeydown(event: KeyboardEvent) {    
+  handleKeydown(event: KeyboardEvent) {
     switch (event.key) {
       case 'ArrowUp':
         if (this.direction !== Direction.Down) this.direction = Direction.Up;
