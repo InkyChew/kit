@@ -1,7 +1,6 @@
 import { PomodoroComponent } from "../pomodoro.component";
 
 export interface IPageState {
-    order: number;
     component: PomodoroComponent;
     init(): void;
     navigateUp(): void;
@@ -11,7 +10,6 @@ export interface IPageState {
 }
 
 export abstract class PageState implements IPageState {
-    abstract order: number;
     abstract path: string;
     component: PomodoroComponent;
 
@@ -26,16 +24,17 @@ export abstract class PageState implements IPageState {
     tabLeft() {
         const tab = this.component.tab == 1 ? 3 : this.component.tab - 1;
         this.component.navigate([this.path, tab]);
+        this.component.tvar--;
     }
 
     tabRight() {
         const tab = this.component.tab == 3 ? 1 : this.component.tab + 1;
         this.component.navigate([this.path, tab]);
+        this.component.tvar++;
     }
 }
 
 export class ClockPage extends PageState {
-    order: number = 1;
     path: string = '/pomodoro/clock';
 
     init() {
@@ -44,15 +43,16 @@ export class ClockPage extends PageState {
 
     navigateUp() {
         this.component.navigate(['/pomodoro/info']);
+        this.component.pvar--;
     }
 
     navigateDown() {
         this.component.navigate(['/pomodoro/setting', this.component.tab]);
+        this.component.pvar++;
     }
 }
 
 export class SettingPage extends PageState {
-    order: number = 2;
     path: string = '/pomodoro/setting';
 
     init() {
@@ -61,15 +61,17 @@ export class SettingPage extends PageState {
 
     navigateUp() {
         this.component.navigate(['/pomodoro/clock', this.component.tab]);
+        this.component.pvar--;
     }
 
     navigateDown() {
         this.component.navigate(['/pomodoro/info']);
+        this.component.pvar++;
     }
 }
 
 export class InfoPage extends PageState {
-    order: number = 3;
+    pvar: number = 3;
     path: string = '/pomodoro/info';
 
     init() {
@@ -79,9 +81,11 @@ export class InfoPage extends PageState {
 
     navigateUp() {
         this.component.navigate(['/pomodoro/setting', this.component.tab]);
+        this.component.pvar--;
     }
 
     navigateDown() {
         this.component.navigate(['/pomodoro/clock', this.component.tab]);
+        this.component.pvar++;
     }
 }

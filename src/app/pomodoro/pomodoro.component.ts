@@ -15,6 +15,8 @@ import { ClockPage, InfoPage, IPageState, SettingPage } from './models/page-stat
 })
 export class PomodoroComponent {
   snapshot?: ActivatedRouteSnapshot;
+  pvar: number = 1;
+  tvar: number = 1;
   tab: number = 1;
   color: string = "";
   pageState?: IPageState;
