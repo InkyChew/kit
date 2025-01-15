@@ -10,8 +10,11 @@
         </nav>
     
         <article>
-            <!-- 仿真番茄鐘 -->
-            <div class="timer">{{ clockState.milliseconds | time }}</div>
+            <div class="clock">
+                <div class="circle" [style.backgroundImage]="this.clockState.progress()">
+                    <div class="time">{{ clockState.milliseconds | time }}</div>
+                </div>
+            </div>
             <div>#{{ clockState.round }}</div>
             @if (clockState.isStart) {
             <button (click)="clockState.stop()">Stop</button>

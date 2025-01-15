@@ -1,5 +1,6 @@
 .section {
     --txt-color: #ffffff;
+    --theme-light-color: color-mix(in srgb, var(--theme), white 20%);
     --theme-dark-color: color-mix(in srgb, var(--theme), black 20%);
     height: 100vh;
     text-align: center;
@@ -15,7 +16,31 @@
     /* box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); */
 }
 
-.timer {
+.clock {
+    width: 250px;
+    height: 250px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--theme-dark-color);
+    border-radius: 1em;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.circle {
+    width: 90%;
+    height: 90%;
+    border-radius: 50%;
+    border: 1px solid var(--theme);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: conic-gradient(var(--theme) 0deg, var(--theme-dark-color) 0deg);
+    transition: background-image 1s linear;
+}
+
+.time {
+    color: var(--theme-light-color);
     font-size: 4rem;
 }
 

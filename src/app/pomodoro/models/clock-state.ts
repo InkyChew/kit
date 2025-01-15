@@ -14,6 +14,7 @@ export interface IClockState {
     nextStage(): void;
     start(): void;
     stop(): void;
+    progress(): string;
 }
 
 export abstract class ClockState implements IClockState {
@@ -51,6 +52,11 @@ export abstract class ClockState implements IClockState {
     stop() {
         this.isStart = false;
         this.timerSubscription?.unsubscribe();
+    }
+
+    progress(): string {
+        const x = 360 - (360 * this.milliseconds / (this.clock.minute * 60000));
+        return `conic-gradient(var(--theme) ${x}deg, var(--theme-dark-color) ${x}deg)`;
     }
 }
 
