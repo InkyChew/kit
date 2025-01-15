@@ -2,6 +2,7 @@ import { PomodoroComponent } from "../pomodoro.component";
 
 export interface IPageState {
     component: PomodoroComponent;
+    color: string;
     init(): void;
     navigateUp(): void;
     navigateDown(): void;
@@ -11,6 +12,7 @@ export interface IPageState {
 
 export abstract class PageState implements IPageState {
     abstract path: string;
+    abstract color: string;
     component: PomodoroComponent;
 
     constructor(context: PomodoroComponent) {
@@ -22,19 +24,22 @@ export abstract class PageState implements IPageState {
     abstract navigateDown(): void;
 
     tabLeft() {
-        const tab = this.component.tab == 1 ? 3 : this.component.tab - 1;
-        this.component.navigate([this.path, tab]);
-        this.component.tvar--;
+        this.navigateTab(-1);
     }
 
     tabRight() {
-        const tab = this.component.tab == 3 ? 1 : this.component.tab + 1;
-        this.component.navigate([this.path, tab]);
-        this.component.tvar++;
+        this.navigateTab(1);
+    }
+
+    private navigateTab(direction: number) {
+        const newTab = (this.component.tab + direction - 1 + 3) % 3 + 1;
+        this.component.navigate([this.path, newTab]);
+        this.component.tvar += direction;
     }
 }
 
 export class ClockPage extends PageState {
+    color: string = '';
     path: string = '/pomodoro/clock';
 
     init() {
@@ -53,6 +58,7 @@ export class ClockPage extends PageState {
 }
 
 export class SettingPage extends PageState {
+    color: string = '';
     path: string = '/pomodoro/setting';
 
     init() {
@@ -71,12 +77,11 @@ export class SettingPage extends PageState {
 }
 
 export class InfoPage extends PageState {
-    pvar: number = 3;
+    color: string = 'skyblue';
     path: string = '/pomodoro/info';
 
     init() {
         if (!this.component.tab) this.component.tab = 1;
-        this.component.color = 'skyblue';
     }
 
     navigateUp() {
@@ -87,5 +92,13 @@ export class InfoPage extends PageState {
     navigateDown() {
         this.component.navigate(['/pomodoro/clock', this.component.tab]);
         this.component.pvar++;
+    }
+
+    override tabLeft(): void {
+
+    }
+
+    override tabRight(): void {
+
     }
 }

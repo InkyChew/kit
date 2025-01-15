@@ -1,5 +1,6 @@
 <!-- <h1 class="page-title">Pomodoro</h1> -->
-<div class="main" [style.--theme]="color">
+@if (pageState) {
+<div class="main" [style.--theme]="pageState.color">
     <nav>
         <ul class="tabs">
             <li class="tab"><a [routerLink]="['/pomodoro/clock', tab]" routerLinkActive="active"><i
@@ -19,3 +20,4 @@
         © <a href="https://inkychew.github.io/about/" target="_blank">InkyChew</a> 2025
     </footer>
 </div>
+}

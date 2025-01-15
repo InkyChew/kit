@@ -14,11 +14,11 @@ import { ClockPage, InfoPage, IPageState, SettingPage } from './models/page-stat
   animations: [pageTransition, tabTransition]
 })
 export class PomodoroComponent {
+
   snapshot?: ActivatedRouteSnapshot;
   pvar: number = 1;
   tvar: number = 1;
   tab: number = 1;
-  color: string = "";
   pageState?: IPageState;
 
   constructor(public _router: Router,
@@ -49,8 +49,13 @@ export class PomodoroComponent {
   }
 
   setTab() {
+    this._settingService.clockSetting.subscribe(res => {
+      this.pageState!.color = res.color;
+    });
     this.tab = +this.snapshot?.params['stage'];
-    this._settingService.getClockSetting(this.tab).subscribe(res => this.color = res.color);
+    this._settingService.getClockSetting(this.tab).subscribe(res => {
+      this._settingService.clockSetting.next(res);
+    });
   }
 
   navigate(commands: any[]) {

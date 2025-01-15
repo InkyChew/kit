@@ -9,14 +9,15 @@ import { IClockSetting } from '../models/clock-setting';
 })
 export class ClockService {
 
-  createClockState(stage: Stage, context: ClockComponent, clock: IClockSetting) {
-    switch (stage) {
+  createClockState(context: ClockComponent, clock: IClockSetting) {
+    switch (clock.id) {
       case Stage.Pomodoro:
         return new FocusState(context, clock);
       case Stage.ShortBreak:
       case Stage.LongBreak:
         return new BreakState(context, clock);
     }
+    throw new Error('Invalid clock ID');
   }
 
   setFocusTimes(times: number) {

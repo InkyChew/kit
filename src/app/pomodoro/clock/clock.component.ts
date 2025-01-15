@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { TimePipe } from '../pipes/time.pipe';
-import { ActivatedRoute, Router, RouterLink, RouterLinkActive } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { Stage } from '../models/stage';
 import { ClockService } from '../services/clock.service';
 import { SettingService } from '../services/setting.service';
@@ -18,21 +18,24 @@ export class ClockComponent {
   clockState?: IClockState;
   focusTimes: number = this._service.getFocusTimes();
 
-  constructor(private _route: ActivatedRoute, public router: Router,
+  constructor(public router: Router,
     private _service: ClockService,
     private _settingService: SettingService,
     public audioService: AudioService
-  ) {
-    this._route.params.subscribe(pms => {
-      const stage = +pms['stage'];
-      this.getClock(stage);
+  ) { }
+
+  ngOnInit() {
+    this.clockState?.stop();
+    this._settingService.clockSetting.subscribe(res => {
+      this.clockState = this._service.createClockState(this, res);
+      this.clockState?.init();
     });
   }
 
   getClock(stage: Stage) {
     this.clockState?.stop();
     this._settingService.getClockSetting(stage).subscribe(res => {
-      this.clockState = this._service.createClockState(stage, this, res);
+      this.clockState = this._service.createClockState(this, res);
       this.clockState?.init();
     });
   }

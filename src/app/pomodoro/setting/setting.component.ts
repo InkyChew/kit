@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { SettingService } from '../services/setting.service';
 import { IClockSetting } from '../models/clock-setting';
-import { RouterLink, RouterLinkActive, ActivatedRoute } from '@angular/router';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 import { AudioService } from '../services/audio.service';
 
 @Component({
@@ -25,19 +25,13 @@ export class SettingComponent {
     color: ['', Validators.required],
   })
 
-  constructor(private _route: ActivatedRoute,
-    private _formBuilder: FormBuilder,
+  constructor(private _formBuilder: FormBuilder,
     private _service: SettingService,
     private _audioService: AudioService
-  ) {
-    this._route.params.subscribe(pms => {
-      const stage = +pms['stage'];
-      this.getClock(stage);
-    });
-  }
+  ) { }
 
-  getClock(stage: number) {
-    this._service.getClockSetting(stage).subscribe(res => {
+  ngOnInit() {
+    this._service.clockSetting.subscribe(res => {
       this.setting = res;
       if (this.setting.interval) {
         this.settingForm.addControl('interval',
@@ -52,10 +46,19 @@ export class SettingComponent {
     this._audioService.play(this.settingForm.value.sound);
   }
 
+  changeTheme() {
+    if(this.setting) {
+      this.setting!.color = this.settingForm.value.color;
+      this._service.clockSetting.next(this.setting);
+    }
+  }
+
   save() {
     if (!this.settingForm.dirty || this.settingForm.invalid) return;
     this.setting = { ...this.setting, ...this.settingForm.value };
-    this._service.putClockSetting(this.setting!).subscribe();
+    this._service.putClockSetting(this.setting!).subscribe(() => {
+      this._service.clockSetting.next(this.setting!);
+    });
     // console.log(this.setting);
   }
 

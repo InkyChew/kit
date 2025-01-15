@@ -1,12 +1,14 @@
 import { Injectable } from '@angular/core';
 import { IndexedDbService } from './indexed-db.service';
-import { switchMap, of, throwError } from 'rxjs';
+import { switchMap, of, throwError, Subject } from 'rxjs';
 import { IClockSetting, LongBreakSetting, PomodoroSetting, ShortBreakSetting } from '../models/clock-setting';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SettingService {
+
+  clockSetting: Subject<IClockSetting> = new Subject();
 
   constructor(private _dbService: IndexedDbService) { }
 
