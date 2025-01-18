@@ -1,9 +1,19 @@
-.main {
+.home {
     --txt-color: #ffffff;
     --theme-dark-color: color-mix(in srgb, var(--theme), black 20%);
     --theme-light-color: color-mix(in srgb, var(--theme), white 20%);
     background-color: var(--theme);
+    height: 100vh;
     overflow: hidden;
+    font-family: math;
+}
+
+.app-title {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    margin: 0;
 }
 
 nav {
@@ -32,12 +42,20 @@ nav {
     border: 1px var(--theme-dark-color);
 }
 
+main {
+    height: calc(100% - 2em);
+    box-sizing: border-box;
+}
+
 footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 100%;
+    height: 2em;
     position: fixed;
     bottom: 0;
     padding: .5em;
-    text-align: center;
     color: var(--txt-color);
 }
 

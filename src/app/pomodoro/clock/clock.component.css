@@ -1,27 +1,29 @@
 .section {
-    --txt-color: #ffffff;
-    --theme-light-color: color-mix(in srgb, var(--theme), white 20%);
-    --theme-dark-color: color-mix(in srgb, var(--theme), black 20%);
-    height: 100vh;
+    max-width: 600px;
+    height: 100%;
     text-align: center;
     color: var(--txt-color);
-    background-color: var(--theme);
+    padding: 20px;
+    margin: 0 auto;
+    border-radius: 8px;
 }
 
-.card {
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 20px;
-    border-radius: 8px;
-    /* box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); */
+.page-title {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    margin: 0;
 }
 
 .clock {
-    width: 250px;
-    height: 250px;
+    width: 100%;
+    max-width: 370px;
+    aspect-ratio: 1 / 1;
     display: flex;
     justify-content: center;
     align-items: center;
+    margin: auto;
     background-color: var(--theme-dark-color);
     border-radius: 1em;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
@@ -42,6 +44,26 @@
 .time {
     color: var(--theme-light-color);
     font-size: 4rem;
+    font-family: monospace;
+}
+
+.round {
+    margin: 1em;
+}
+
+.clock-ctrl {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1em;
+}
+
+.clock-ctrl button {
+    flex: 1;
+}
+
+.clock-ctrl button:first-child {
+    flex: 2;
 }
 
 .tabs {
@@ -75,13 +97,18 @@ a.active {
 }
 
 button {
-    color: var(--txt-color);
+    font-size: 1em;
     font-weight: bold;
-    background: transparent;
+    font-family: inherit;
+    color: var(--txt-color);
+    background: var(--theme);
     padding: 1em 2em;
-    border: none;
+    border: 1px solid var(--txt-color);
     outline: none;
     cursor: pointer;
     border-radius: 8px;
 }
 
+button:hover {
+    background: var(--theme-dark-color);
+}

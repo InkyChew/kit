@@ -1,16 +1,19 @@
-<!-- <h1 class="page-title">Pomodoro</h1> -->
 @if (pageState) {
-<div class="main" [style.--theme]="pageState.color">
-    <nav>
-        <ul class="tabs">
-            <li class="tab"><a [routerLink]="['/pomodoro/clock', tab]" routerLinkActive="active"><i
-                        class="fa-solid fa-stopwatch"></i></a></li>
-            <li class="tab"><a [routerLink]="['/pomodoro/setting', tab]" routerLinkActive="active"><i
-                        class="fa-solid fa-gear"></i></a></li>
-            <li class="tab"><a routerLink="info" routerLinkActive="active"><i class="fa-solid fa-circle-info"></i></a>
-            </li>
-        </ul>
-    </nav>
+<div class="home" [style.--theme]="pageState.color">
+    <header>
+        <h1 class="app-title">Pomodoro</h1>
+        <nav>
+            <ul class="tabs">
+                <li class="tab"><a [routerLink]="['/pomodoro/clock', tab]" routerLinkActive="active"><i
+                            class="fa-solid fa-stopwatch"></i></a></li>
+                <li class="tab"><a [routerLink]="['/pomodoro/setting', tab]" routerLinkActive="active"><i
+                            class="fa-solid fa-gear"></i></a></li>
+                <li class="tab"><a routerLink="info" routerLinkActive="active"><i
+                            class="fa-solid fa-circle-info"></i></a>
+                </li>
+            </ul>
+        </nav>
+    </header>
 
     <main [@pageTransition]="pvar" [@tabTransition]="tvar">
         <router-outlet />

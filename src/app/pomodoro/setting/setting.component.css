@@ -1,27 +1,24 @@
 .section {
-    --txt-color: #ffffff;
-    --theme-dark-color: color-mix(in srgb, var(--theme), black 20%);
-    height: 100vh;
+    max-width: 600px;
+    height: 100%;
     text-align: center;
     color: var(--txt-color);
-    background-color: var(--theme);
-}
-
-.card {
-    max-width: 600px;
-    margin: 0 auto;
     padding: 20px;
+    margin: 0 auto;
     border-radius: 8px;
-    /* box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); */
 }
 
-/* .setting-form {
-    display: flex;
-    flex-direction: column;
+.page-title {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    margin: 0;
 }
+
 .form-ctrl {
-    margin-top: auto;
-} */
+    margin-top: 1.5em;
+}
 
 .field {
     font-size: 1rem;
@@ -79,14 +76,17 @@ a.active {
 }
 
 button {
+    width: 100%;
+    font-size: 1em;
     font-weight: bold;
+    font-family: inherit;
     color: var(--txt-color);
-    background: var(--theme);
     padding: 1em 2em;
+    border-radius: 8px;
     border: 1px solid var(--txt-color);
     outline: none;
     cursor: pointer;
-    border-radius: 8px;
+    background: var(--theme);
 }
 
 button:hover {

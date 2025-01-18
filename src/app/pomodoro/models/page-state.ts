@@ -77,7 +77,7 @@ export class SettingPage extends PageState {
 }
 
 export class InfoPage extends PageState {
-    color: string = 'skyblue';
+    color: string = 'cornflowerblue';
     path: string = '/pomodoro/info';
 
     init() {

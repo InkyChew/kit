@@ -1,12 +1,22 @@
 .section {
-    --txt-color: #ffffff;
-    --theme-dark-color: color-mix(in srgb, var(--theme), black 20%);
-    height: 100vh;
-    text-align: center;
+    max-width: 600px;
+    height: 100%;
     color: var(--txt-color);
-    background-color: var(--theme);
+    padding: 20px;
+    margin: 0 auto;
+    border-radius: 8px;
+    font-family: fangsong;
 }
 
-h3 {
-    margin-top: 0;
+.page-title {
+    letter-spacing: 2px;
+    color: lawngreen;
+    font-family: math;
+}
+
+.hide {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
 }
