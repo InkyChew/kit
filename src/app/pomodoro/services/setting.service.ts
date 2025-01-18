@@ -40,12 +40,12 @@ export class SettingService {
 
   getAudioFiles() {
     return [
-      { name: 'bell', path: '/assets/pomodoro/bell.mp3' },
-      { name: 'ding', path: '/assets/pomodoro/ding.mp3' },
-      { name: 'bell-ding', path: '/assets/pomodoro/bell-ding.mp3' },
-      { name: 'lofi', path: '/assets/pomodoro/lofi.mp3' },
-      { name: 'guitar', path: '/assets/pomodoro/guitar.mp3' },
-      { name: 'melody', path: '/assets/pomodoro/melody.mp3' },
+      { name: 'bell', path: 'assets/pomodoro/bell.mp3' },
+      { name: 'ding', path: 'assets/pomodoro/ding.mp3' },
+      { name: 'bell-ding', path: 'assets/pomodoro/bell-ding.mp3' },
+      { name: 'lofi', path: 'assets/pomodoro/lofi.mp3' },
+      { name: 'guitar', path: 'assets/pomodoro/guitar.mp3' },
+      { name: 'melody', path: 'assets/pomodoro/melody.mp3' },
     ];
   }
 

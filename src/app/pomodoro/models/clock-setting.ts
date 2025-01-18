@@ -12,7 +12,7 @@ export abstract class ClockSetting implements IClockSetting {
     abstract color: string;
     abstract minute: number;
     autoStart: boolean = false;
-    sound: string = "/assets/pomodoro/bell.mp3";
+    sound: string = "assets/pomodoro/bell.mp3";
 }
 
 export class PomodoroSetting extends ClockSetting {
