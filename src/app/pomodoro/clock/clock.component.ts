@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { TimePipe } from '../pipes/time.pipe';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { Stage } from '../models/stage';
@@ -45,6 +45,20 @@ export class ClockComponent {
   }
 
   nextStage(stage: Stage) {
-    this.router.navigateByUrl(`/pomodoro/${stage}`);
+    this.router.navigateByUrl(`/pomodoro/clock/${stage}`);
+  }
+
+  @HostListener('window:keydown', ['$event'])
+  handleKeyDown(event: KeyboardEvent) {
+    if (!this.clockState) return;
+    const isStart = this.clockState.isStart;
+    switch (event.code) {
+      case 'Space':
+        isStart ? this.clockState.stop() : this.clockState.start();
+        break;
+      case 'End':
+        if (isStart) this.clockState.nextStage();
+        break;
+    }
   }
 }
